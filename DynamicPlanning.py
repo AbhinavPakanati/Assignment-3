@@ -1,7 +1,7 @@
 import heapq
 import random
 
-# -------- INPUTS --------
+
 GRID_SIZE = int(input("Enter grid size (e.g., 20 or 70): "))
 
 print("\nEnter START position:")
@@ -15,7 +15,6 @@ gc = int(input(f"Col (0-{GRID_SIZE-1}): "))
 start = (sr, sc)
 goal = (gr, gc)
 
-# obstacle density
 print("\nDynamic obstacle density:")
 print("1. Low (~1%)")
 print("2. Medium (~2%)")
@@ -32,7 +31,7 @@ probability = density_map.get(choice, 0.02)
 
 DIRECTIONS = [(0,1),(1,0),(0,-1),(-1,0)]
 
-# -------- FUNCTIONS --------
+
 
 def heuristic(a, b):
     return abs(a[0]-b[0]) + abs(a[1]-b[1])
@@ -79,7 +78,7 @@ def add_dynamic_obstacles(grid, current, goal, probability):
     for i in range(GRID_SIZE):
         for j in range(GRID_SIZE):
 
-            # avoid blocking robot and goal
+           
             if (i, j) == current or (i, j) == goal:
                 continue
 
@@ -101,17 +100,16 @@ def simulate_dynamic(grid, start, goal):
             print("❌ No path available!")
             return
 
-        # move one step
         current = path[1]
         full_path.append(current)
         steps += 1
 
         print(f"Step {steps}: Moving to {current}")
 
-        # dynamic obstacles
+        
         add_dynamic_obstacles(grid, current, goal, probability)
 
-        # ensure valid positions
+   
         grid[current[0]][current[1]] = 0
         grid[goal[0]][goal[1]] = 0
 
@@ -120,11 +118,11 @@ def simulate_dynamic(grid, start, goal):
     print("Path:", full_path)
 
 
-# -------- MAIN --------
+
 
 grid = [[0]*GRID_SIZE for _ in range(GRID_SIZE)]
 
-# ensure start and goal are free
+
 grid[start[0]][start[1]] = 0
 grid[goal[0]][goal[1]] = 0
 
