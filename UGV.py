@@ -57,7 +57,7 @@ def astar(grid, start, goal):
 
     end_time = time.time()
 
-    # reconstruct path
+ 
     path = []
     node = goal
     while node in came_from:
@@ -87,7 +87,6 @@ def print_grid(grid, path, start, goal):
         print()
 
 
-# ---------------- MAIN ----------------
 
 if __name__ == "__main__":
 
@@ -115,16 +114,16 @@ if __name__ == "__main__":
     start = (sr, sc)
     goal = (gr, gc)
 
-    # ensure start and goal are free
+
     grid[sr][sc] = 0
     grid[gr][gc] = 0
 
     path, visited, time_taken = astar(grid, start, goal)
 
-    print("--------------------------------------------------")
+    print("---")
     print(f"\nPath found  : {len(path)} steps  (cost = {len(path)-1})")
     print(f"Start -> Goal: ({sr}, {sc}) -> ({gr}, {gc})")
-    print("\n--------------------------------------------------")
+    print("\n---")
 
     show = input("\nDisplay grid (y/n): ").lower()
 
@@ -132,6 +131,6 @@ if __name__ == "__main__":
         print()
         print_grid(grid, path, start, goal)
 
-    print("\n--- Measures of Effectiveness ---")
+    print("\n Measures of Effectiveness ")
     print(f"Nodes explored : {visited}")
     print(f"Time taken     : {round(time_taken, 6)} seconds")
